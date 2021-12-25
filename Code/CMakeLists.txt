@@ -15,6 +15,7 @@
  find_package(OpenCV REQUIRED)
 
 
+
  FILE(GLOB IMAGED_SRC
     d_bio_focus.cpp
     d_bio_nucleusblob.cpp
@@ -105,7 +106,6 @@ FILE(GLOB IMAGE_D_HEADER
     d_bio_enum.h
     d_bio_enum.h
     d_bio_focus.h
-    d_bio_nucleusblob.h
     d_bio_nucleusimage.h
     d_bio_nucleuslife.h
     d_bio_nucleuspedigree.h
@@ -192,8 +192,17 @@ FILE(GLOB IMAGE_D_HEADER
     d_makro_manuelsegmentation.h
     d_makro_huangvisualization.h
     )
+FILE(GLOB IMAGE_D_RESOURCES
+   img/images.qrc
+   img.qrc
+    )
 
-add_executable(ImageD ${IMAGED_SRC} ${IMAGED_HEADER})
-target_include_directories(ImageD PUBLIC ${Qt5Widgets_INCLUDE_DIRS} ${Qt5Charts_INCLUDE_DIRS} ${Qt5Multimedia_INCLUDE_DIRS} ${Qt5MultimediaWidgets_INCLUDE_DIRS} ${Qt5DataVisualization_INCLUDE_DIRS}  ${OpenCV_INCLUDE_DIRS})
 
-target_link_libraries(ImageD PRIVATE Qt5::Widgets Qt5::Charts Qt5::Multimedia Qt5::MultimediaWidgets Qt5::DataVisualization ${OpenCV_LIBS})
+add_executable(ImageD ${IMAGED_SRC} ${IMAGED_HEADER} ${IMAGE_D_RESOURCES})
+target_include_directories(ImageD PUBLIC ${Qt5Widgets_INCLUDE_DIRS}
+                           ${Qt5Charts_INCLUDE_DIRS} ${Qt5Multimedia_INCLUDE_DIRS}
+                           ${Qt5MultimediaWidgets_INCLUDE_DIRS} ${Qt5DataVisualization_INCLUDE_DIRS}
+                           ${OpenCV_INCLUDE_DIRS})
+
+target_link_libraries(ImageD PRIVATE Qt5::Widgets Qt5::Charts Qt5::Multimedia Qt5::MultimediaWidgets
+                     Qt5::DataVisualization ${OpenCV_LIBS})
