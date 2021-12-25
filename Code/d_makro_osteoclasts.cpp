@@ -377,7 +377,7 @@ void D_MAKRO_Osteoclasts::Update_Image_ProcView_SegmentationManual()
     ERR(D_Img_Proc::Normalize(
             &MA_tmp_coloredBackground,
             &MA_VisVP_3ch,
-            CV_MINMAX,
+            cv::NORM_MINMAX,
             CV_8UC1,
             0,
             255),
@@ -489,7 +489,7 @@ void D_MAKRO_Osteoclasts::Update_NucleiSegmentation_Auto_Steps(int start_step)
         ERR(D_Img_Proc::Normalize(
                 &(vvMA_VpStep_NucAutoSeg[VP_current][c_STEP_8BIT]),
                 &(vvMA_VpStep_NucAutoSeg[VP_current][c_STEP_PROJECT]),
-                CV_MINMAX,
+                cv::NORM_MINMAX,
                 CV_8UC1,
                 0,
                 255),
@@ -516,9 +516,9 @@ void D_MAKRO_Osteoclasts::Update_NucleiSegmentation_Auto_Steps(int start_step)
         ERR(D_Img_Proc::Threshold_Adaptive(
                 &(vvMA_VpStep_NucAutoSeg[VP_current][c_STEP_THRES]),
                 &(vvMA_VpStep_NucAutoSeg[VP_current][c_STEP_BLUR]),
-                CV_THRESH_BINARY,
+                cv::THRESH_BINARY,
                 255,
-                CV_ADAPTIVE_THRESH_GAUSSIAN_C,
+                cv::ADAPTIVE_THRESH_GAUSSIAN_C,
                 ui->spinBox_SegAuto_Thres_Size->value(),
                 ui->doubleSpinBox_SegAuto_Thres_Offset->value()),
             "Update_NucleiSegmentation_Auto_Steps",
@@ -530,8 +530,8 @@ void D_MAKRO_Osteoclasts::Update_NucleiSegmentation_Auto_Steps(int start_step)
         ERR(D_Img_Proc::Transformation_Distance(
                 &(vvMA_VpStep_NucAutoSeg[VP_current][c_STEP_DISTANCE]),
                 &(vvMA_VpStep_NucAutoSeg[VP_current][c_STEP_THRES]),
-                CV_DIST_L2,
-                CV_DIST_MASK_PRECISE),
+                cv::DIST_L2,
+                cv::DIST_MASK_PRECISE),
             "Update_NucleiSegmentation_Auto_Steps",
             "c_STEP_DISTANCE - euclidean distance transfrom");
     }

@@ -548,7 +548,7 @@ void D_MAKRO_Visualization::Images_Init()
         ERR(D_Img_Proc::Convert_Color(
                 &(vMA_Image_Pages_In[page]),
                 pStore->get_Adress(0),
-                CV_BGR2GRAY));
+                cv::COLOR_BGR2GRAY));
 
     vMA_Image_Pages_Out_Gray.clear();
     vMA_Image_Pages_Out_Gray.resize(pages_number);
@@ -556,7 +556,7 @@ void D_MAKRO_Visualization::Images_Init()
         ERR(D_Img_Proc::Convert_Color(
                 &(vMA_Image_Pages_Out_Gray[page]),
                 pStore->get_Adress(0),
-                CV_BGR2GRAY));
+                cv::COLOR_BGR2GRAY));
 
     vMA_Image_Pages_Out_Color.clear();
     vMA_Image_Pages_Out_Color.resize(pages_number);

@@ -575,7 +575,7 @@ void D_MAKRO_CerebralOrganoids::UpdateImgProc_Step(int step)
         ERR(D_Img_Proc::Convert_Color(
                 &(vMA_ProcSteps[STEP_COLOR_HSV]),
                 &(vMA_ProcSteps[STEP_BLUR]),
-                CV_BGR2HSV),
+                cv::COLOR_BGR2HSV),
             "UpdateImgProc_Step",
             "STEP_HSV");
     }

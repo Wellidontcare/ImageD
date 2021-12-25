@@ -966,7 +966,7 @@ void m_makro_foci::Convert()
 
 void m_makro_foci::Threshold()
 {
-    int out_mode = CV_THRESH_BINARY;
+    int out_mode = cv::THRESH_BINARY;
     double max_val = 255 ;
 
     int mask_size;
@@ -1051,7 +1051,7 @@ void m_makro_foci::Circled_selected_centroid()
     for(int t=0;t<Size_image_in_time;t++){
        vvMA_Nuclei[c_ST_N_INPUT_CONV_8BIT][t].copyTo( vvMA_Nuclei[c_sT_N_Label_in_time_CIRCLED_without_labels][t]); //pMA_In->type()
         cv::resize(vvMA_Nuclei[c_sT_N_Label_in_time_CIRCLED_without_labels][t],vvMA_Nuclei[c_sT_N_Label_in_time_CIRCLED_without_labels][t],Size(),2,2,INTER_LINEAR);
-        cv::cvtColor(vvMA_Nuclei[c_sT_N_Label_in_time_CIRCLED_without_labels][t],vvMA_Nuclei[c_sT_N_Label_in_time_CIRCLED_without_labels][t],CV_GRAY2BGR); // source, dest
+        cv::cvtColor(vvMA_Nuclei[c_sT_N_Label_in_time_CIRCLED_without_labels][t],vvMA_Nuclei[c_sT_N_Label_in_time_CIRCLED_without_labels][t],cv::COLOR_GRAY2BGR); // source, dest
 
         ERR(draw_circle(&vvMA_Nuclei[c_sT_N_Label_in_time_CIRCLED_without_labels][t],
                     &vvMA_Nuclei[c_sT_N_Label_in_time_CIRCLED_with_labels][t],
@@ -1114,7 +1114,7 @@ int m_makro_foci::draw_circle(Mat *pMA_Out,Mat *pMA_Out2, Mat *pMA_In,Mat *pMA_l
                                ui->doubleSpinBox_size_font->value(),
                                Scalar(0, 0, color),
                                thickness,
-                               CV_AA);
+                               cv::LINE_AA);
             }
     return 0;
 }
@@ -1169,7 +1169,7 @@ int m_makro_foci::draw_circle_2(Mat *pMA_Out,Mat *pMA_Out2, Mat *pMA_In,Mat *pMA
                     ui->doubleSpinBox_size_font->value(),
                     Scalar(0, 0, color),
                     thickness,
-                    CV_AA);
+                    cv::LINE_AA);
             }
     return 0;
 }
@@ -1327,7 +1327,7 @@ int m_makro_foci::Image_proj_max_intensity_t_positif(vector<Mat> vMA_In, Mat *pM
 
 void m_makro_foci::Threshold_av()
 {
-    int out_mode = CV_THRESH_BINARY;
+    int out_mode = cv::THRESH_BINARY;
     double max_val = 255 ;
 
     int mask_size;
@@ -3322,7 +3322,7 @@ void m_makro_foci::Init_add_focus_user()
 {
     qDebug()<<"Init_add_focus_user() 1";
     MA_Max_proj_add_focus = vMA_Average[c_sT_Max_Proj_T_positives].clone();
-    cvtColor(MA_Max_proj_add_focus,MA_Max_proj_add_focus,CV_GRAY2BGR); // source, dest
+    cvtColor(MA_Max_proj_add_focus,MA_Max_proj_add_focus,cv::COLOR_GRAY2BGR); // source, dest
 
     int label_selected;
     for (int label=1;label<FeatureFoci_nb_label_selected;label++){
@@ -3391,7 +3391,7 @@ void m_makro_foci::Delete_added_foci_user()
     Circled_selected_centroid();
 
     MA_Max_proj_add_focus = vMA_Average[c_sT_Max_Proj_T_positives].clone();
-    cvtColor(MA_Max_proj_add_focus,MA_Max_proj_add_focus,CV_GRAY2BGR); // source, dest
+    cvtColor(MA_Max_proj_add_focus,MA_Max_proj_add_focus,cv::COLOR_GRAY2BGR); // source, dest
     int label_selected;
     for (int label=1;label<FeatureFoci_nb_label_selected;label++){
         label_selected=LabelFociSelected_To_LabelFoci[label];

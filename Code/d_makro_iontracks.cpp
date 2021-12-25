@@ -1274,7 +1274,7 @@ void D_MAKRO_IonTracks::Image_ColorRGB_Info()
     ERR(D_Img_Proc::Normalize(
             &MA_tmp_R,
             &(vvMA_Proc_ImgStep[index_img][c_STEP_LOAD]),
-            CV_MINMAX,
+            cv::NORM_MINMAX,
             CV_8UC1,
             0,
             255),

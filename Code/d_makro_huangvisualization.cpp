@@ -394,7 +394,7 @@ void D_MAKRO_HuangVisualization::Get_Mask()
     if(D_Img_Proc::Convert_Color(
                 &MA_MaskBinary_3C,
                 &MA_MaskBinary,
-                CV_GRAY2BGR)
+                cv::COLOR_GRAY2BGR)
             != ER_okay)
         return;
 
@@ -640,7 +640,7 @@ void D_MAKRO_HuangVisualization::Pad_Image()
     if(D_Img_Proc::Convert_Color(
                &MA_ImgIn_GrayPadded3Ch,
                &MA_ImgIn_GrayPadded,
-               CV_GRAY2BGR)
+               cv::COLOR_GRAY2BGR)
            != ER_okay)
        return;
 

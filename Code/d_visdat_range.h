@@ -13,7 +13,7 @@
 #include <d_enum.h>
 #include <d_error_handler.h>
 #include <d_visdat_dim.h>
-#include <D_VisDat_Slice_2D.h>
+#include <d_visdat_slice_2d.h>
 
 //Qt
 #include <QString>

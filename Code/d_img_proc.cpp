@@ -7,6 +7,8 @@
  ************************************/
 
 #include "d_img_proc.h"
+#include <opencv2/features2d.hpp>
+#include <opencv2/imgproc.hpp>
 
 D_Img_Proc::D_Img_Proc()
 {
@@ -156,7 +158,7 @@ int D_Img_Proc::Load_From_Path_Raw(Mat *pMA_Out, string path, int width, int hei
         fread(p_buffer, sizeof(uchar), pixel_count, p_file);                            //read file from file to buffer
         memcpy(MA_tmp.data, p_buffer, pixel_count);                                     //copy data from buffer to mat
         free(p_buffer);                                                                 //free buffer
-        cvtColor(MA_tmp, *pMA_Out, CV_BayerBG2GRAY);                                    //convert
+        cvtColor(MA_tmp, *pMA_Out, cv::COLOR_BayerBG2GRAY);                                    //convert
     }
         break;
 
@@ -167,7 +169,7 @@ int D_Img_Proc::Load_From_Path_Raw(Mat *pMA_Out, string path, int width, int hei
         memcpy(MA_tmp.data, p_buffer, pixel_count);                                     //copy data from buffer to mat
         free(p_buffer);                                                                 //free buffer
         *pMA_Out = MA_tmp.clone();                                                      //clone (convert not supported)
-        //cvtColor(MA_tmp, *pMA_Out, CV_BayerBG2GRAY);                                  //convert
+        //cvtColor(MA_tmp, *pMA_Out, cv::COLOR_BayerBG2GRAY);                                  //convert
     }
         break;
 
@@ -177,7 +179,7 @@ int D_Img_Proc::Load_From_Path_Raw(Mat *pMA_Out, string path, int width, int hei
         fread(p_buffer, sizeof(ushort), pixel_count, p_file);                           //read file from file to buffer
         memcpy(MA_tmp.data, p_buffer, pixel_count);                                     //copy data from buffer to mat
         free(p_buffer);                                                                 //free buffer
-        cvtColor(MA_tmp, *pMA_Out, CV_BayerBG2GRAY);                                    //convert
+        cvtColor(MA_tmp, *pMA_Out, cv::COLOR_BayerBG2GRAY);                                    //convert
     }
         break;
 
@@ -188,7 +190,7 @@ int D_Img_Proc::Load_From_Path_Raw(Mat *pMA_Out, string path, int width, int hei
         memcpy(MA_tmp.data, p_buffer, pixel_count);                                     //copy data from buffer to mat
         free(p_buffer);                                                                 //free buffer
         *pMA_Out = MA_tmp.clone();                                                      //clone (convert not supported)
-        //cvtColor(MA_tmp, *pMA_Out, CV_BayerBG2GRAY);                                  //convert
+        //cvtColor(MA_tmp, *pMA_Out, cv::COLOR_BayerBG2GRAY);                                  //convert
     }
         break;
 
@@ -199,7 +201,7 @@ int D_Img_Proc::Load_From_Path_Raw(Mat *pMA_Out, string path, int width, int hei
         memcpy(MA_tmp.data, p_buffer, pixel_count);                                     //copy data from buffer to mat
         free(p_buffer);                                                                 //free buffer
         *pMA_Out = MA_tmp.clone();                                                      //clone (convert not supported)
-        //cvtColor(MA_tmp, *pMA_Out, CV_BayerBG2GRAY);                                  //convert
+        //cvtColor(MA_tmp, *pMA_Out, cv::COLOR_BayerBG2GRAY);                                  //convert
     }
         break;
 
@@ -1014,7 +1016,7 @@ int D_Img_Proc::Convert_Mat_to_QImage(QImage *pQI_Out, Mat *pMA_In, bool use_cus
             ER = Normalize(
                         &MA_tmp_8bit,
                         pMA_In,
-                        CV_MINMAX,
+                        NORM_MINMAX,
                         CV_8U,
                         0,
                         255);
@@ -1123,7 +1125,7 @@ int D_Img_Proc::Convert_Mat_to_QImage(QImage *pQI_Out, Mat *pMA_In)
         ER = Normalize(
                     &MA_tmp_8bit,
                     pMA_In,
-                    CV_MINMAX,
+                    cv::MINMAX,
                     CV_8UC1,
                     0,
                     255);
@@ -2526,18 +2528,18 @@ int D_Img_Proc::Convert_Color(Mat *pMA_Out, Mat *pMA_In, int cvt_mode)
         return ER_empty;
 
     if((pMA_In->depth() != CV_8U))
-        if((cvt_mode != CV_GRAY2BGR) && (cvt_mode != CV_BGR2GRAY) && (cvt_mode != CV_GRAY2RGB) && (cvt_mode != CV_RGB2GRAY))
+        if((cvt_mode != cv::COLOR_GRAY2BGR) && (cvt_mode != cv::COLOR_BGR2GRAY) && (cvt_mode != cv::COLOR_GRAY2RGB) && (cvt_mode != cv::COLOR_RGB2GRAY))
             return ER_type_bad;
 
     if(pMA_In->channels() != 1 && pMA_In->channels() != 3)
         return ER_channel_bad;
 
     if(pMA_In->channels() == 1)
-        if(cvt_mode != CV_GRAY2BGR && cvt_mode != CV_GRAY2RGB)
+        if(cvt_mode != cv::COLOR_GRAY2BGR && cvt_mode != cv::COLOR_GRAY2RGB)
             return ER_channel_missmatch;
 
     if(pMA_In->channels() == 3)
-        if(cvt_mode == CV_GRAY2BGR || cvt_mode == CV_GRAY2RGB)
+        if(cvt_mode == cv::COLOR_GRAY2BGR || cvt_mode == cv::COLOR_GRAY2RGB)
             return ER_channel_missmatch;
 
     cvtColor(
@@ -2676,7 +2678,7 @@ int D_Img_Proc::Convert_Color2Mono(Mat *pMA_Out, Mat *pMA_In, int col2mono_code)
         return Convert_Color(
                     pMA_Out,
                     pMA_In,
-                    CV_BGR2GRAY);
+                    cv::COLOR_BGR2GRAY);
 
     case c_COL2MONO_BLUE:
     case c_COL2MONO_GREEN:
@@ -2692,7 +2694,7 @@ int D_Img_Proc::Convert_Color2Mono(Mat *pMA_Out, Mat *pMA_In, int col2mono_code)
         ER = Convert_Color(
                     &MA_tmp_transform,
                     pMA_In,
-                    CV_BGR2XYZ);
+                    cv::COLOR_BGR2XYZ);
         break;
 
     case c_COL2MONO_HUE:
@@ -2701,7 +2703,7 @@ int D_Img_Proc::Convert_Color2Mono(Mat *pMA_Out, Mat *pMA_In, int col2mono_code)
         ER = Convert_Color(
                     &MA_tmp_transform,
                     pMA_In,
-                    CV_BGR2HSV_FULL);
+                    cv::COLOR_BGR2HSV_FULL);
         break;
 
     case c_COL2MONO_BRIGHTNESS:
@@ -2710,14 +2712,14 @@ int D_Img_Proc::Convert_Color2Mono(Mat *pMA_Out, Mat *pMA_In, int col2mono_code)
         ER = Convert_Color(
                     &MA_tmp_transform,
                     pMA_In,
-                    CV_BGR2YCrCb);
+                    cv::COLOR_BGR2YCrCb);
         break;
 
     case c_COL2MONO_LUMINANZ:
         ER = Convert_Color(
                     &MA_tmp_transform,
                     pMA_In,
-                    CV_BGR2Lab);
+                    cv::COLOR_BGR2Lab);
         break;
 
     default:
@@ -3418,7 +3420,7 @@ int D_Img_Proc::Convert_8UC1(Mat *pMA_Out, Mat *pMA_In)
         ER = Normalize(
                     &MA_tmp_8bit,
                     pMA_In,
-                    CV_MINMAX,
+                    NORM_MINMAX,
                     CV_8U,
                     0,
                     255);
@@ -3804,7 +3806,7 @@ int D_Img_Proc::Convert_Angle2Color_Rad(Mat *pMA_Out, Mat *pMA_InAngleRad, uchar
     int ER = Convert_Color(
                 pMA_Out,
                 &MA_tmp_HSV,
-                CV_HSV2RGB_FULL);
+                cv::COLOR_HSV2RGB_FULL);
 
     MA_tmp_HSV.release();
     return ER;
@@ -4407,7 +4409,7 @@ int D_Img_Proc::Combi_8UC1_binary(Mat *pMA_Out, Mat *pMA_In)
         ER = Normalize(
                     &MA_tmp,
                     &MA_tmp,
-                    CV_MINMAX,
+                    NORM_MINMAX,
                     type,
                     0,
                     255);
@@ -4421,7 +4423,7 @@ int D_Img_Proc::Combi_8UC1_binary(Mat *pMA_Out, Mat *pMA_In)
             ER = Convert_Color(
                         &MA_tmp,
                         &MA_tmp,
-                        CV_BGR2GRAY);
+                        cv::COLOR_BGR2GRAY);
         else
             return ER_channel_bad;
     }
@@ -4432,9 +4434,9 @@ int D_Img_Proc::Combi_8UC1_binary(Mat *pMA_Out, Mat *pMA_In)
         ER = Threshold_Auto(
                     pMA_Out,
                     &MA_tmp,
-                    CV_THRESH_BINARY,
+                    cv::THRESH_BINARY,
                     255,
-                    CV_THRESH_OTSU);
+                    cv::THRESH_OTSU);
     }
     if(ER != ER_okay)   return ER;
 
@@ -6450,7 +6452,7 @@ int D_Img_Proc::Threshold_Auto(Mat *pMA_Out, Mat *pMA_In, int out_mode, double m
 {
     if(pMA_In->empty())                                         return ER_empty;
     if(pMA_In->depth() != CV_8U)                                return ER_bitdepth_bad;
-    if(auto_mode == CV_THRESH_OTSU && pMA_In->channels() > 1)   return ER_type_bad;
+    if(auto_mode == THRESH_OTSU && pMA_In->channels() > 1)   return ER_type_bad;
 
     threshold(
                 *pMA_In,
@@ -6467,7 +6469,7 @@ int D_Img_Proc::Threshold_Adaptive(Mat *pMA_Out, Mat *pMA_In, int out_mode, doub
     if(pMA_In->empty())                                                         return ER_empty;
     if(pMA_In->depth() != CV_8U)                                                return ER_bitdepth_bad;
     if(pMA_In->channels() > 1)                                                  return ER_channel_bad;
-    if((out_mode != CV_THRESH_BINARY) && (out_mode != CV_THRESH_BINARY_INV))    return ER_type_bad;
+    if((out_mode != cv::THRESH_BINARY) && (out_mode != cv::THRESH_BINARY_INV))    return ER_type_bad;
 
     //qDebug() << "Fix 2 * mask_size + 1 in D_Img_Proc::Threshold_Adaptive!!!!!!!!!!!";
     adaptiveThreshold(
@@ -6758,11 +6760,11 @@ int D_Img_Proc::Color_Grab(Mat *pMA_Out, Mat *pMA_In, int color_space, int out_m
     {
         int         cvt_mode;
         switch (color_space) {
-        case 1:     cvt_mode = CV_BGR2XYZ;      break;
-        case 2:     cvt_mode = CV_BGR2YCrCb;      break;
-        case 3:     cvt_mode = CV_BGR2HSV;      break;
-        case 4:     cvt_mode = CV_BGR2Lab;      break;
-        case 5:     cvt_mode = CV_BGR2Luv;      break;
+            case 1:     cvt_mode = cv::COLOR_BGR2XYZ;      break;
+            case 2:     cvt_mode = cv::COLOR_BGR2YCrCb;      break;
+            case 3:     cvt_mode = cv::COLOR_BGR2HSV;      break;
+            case 4:     cvt_mode = cv::COLOR_BGR2Lab;      break;
+            case 5:     cvt_mode = cv::COLOR_BGR2Luv;      break;
         default:                                return ER_parameter_bad;}
 
         ER = Convert_Color(
@@ -6817,7 +6819,7 @@ int D_Img_Proc::Color_Grab(Mat *pMA_Out, Mat *pMA_In, int color_space, int out_m
         ER = Convert_Color(
                     &MA_mask,
                     pMA_Out,
-                    CV_GRAY2BGR);
+                    cv::COLOR_GRAY2BGR);
         if(ER != ER_okay)   return ER;
 
         ER = Math_ImgImg_BitAnd(
@@ -6879,9 +6881,9 @@ int D_Img_Proc::Morphology_Skeleton(Mat *pMA_Out, Mat *pMA_In, int elem_type, un
     ER = Threshold_Auto(
                 pMA_In,
                 &MA_tmp_bin_in,
-                CV_THRESH_BINARY,
+                cv::THRESH_BINARY,
                 255,
-                CV_THRESH_OTSU);
+                THRESH_OTSU);
     if(ER != ER_okay && ER != ER_empty)
     {
         qDebug() << "Error in Thresh";
@@ -7432,7 +7434,7 @@ int D_Img_Proc::Transformation_Watershed_Auto(Mat *pMA_Out, Mat *pMA_In, Mat *pM
     ER = Convert_Color(
                 &MA_in_3ch,
                 pMA_In,
-                CV_GRAY2RGB);
+                cv::COLOR_GRAY2RGB);
     if(ER != ER_okay)   return ER;
 
     //labeling the unkown area (0)
@@ -7496,7 +7498,7 @@ int D_Img_Proc::Transformation_Watershed_Auto(Mat *pMA_Out, Mat *pMA_In, Mat *pM
             ER = Threshold_Value(
                         &MA_foreground,
                         &MA_out_8bit,
-                        CV_THRESH_BINARY,
+                        cv::THRESH_BINARY,
                         255,
                         1);
             if(ER != ER_okay)   return ER;
@@ -7558,7 +7560,7 @@ int D_Img_Proc::Transformation_Watershed_Auto(Mat *pMA_Out, Mat *pMA_In, Mat *pM
         ER = Normalize(
                     pMA_Out,
                     pMA_Out,
-                    CV_MINMAX,
+                    NORM_MINMAX,
                     CV_8U,
                     0,
                     max);
@@ -10717,7 +10719,7 @@ int D_Img_Proc::Filter_Eilenstein_Prototype(Mat *pMA_Out, Mat *pMA_In, bool cmp_
         Normalize(
                     pMA_Out,
                     pMA_Out,
-                    CV_MINMAX,
+                    NORM_MINMAX,
                     pMA_In->depth(),
                     0,
                     max_val);
@@ -15610,7 +15612,7 @@ int D_Img_Proc::Feature_Visualize(Mat *pMA_Out, Mat *pMA_In, int feature, int co
     ER = Normalize(
                 &MA_tmp_feature,
                 &MA_tmp_feature,
-                CV_MINMAX,
+                NORM_MINMAX,
                 CV_8U,
                 0,
                 255);
@@ -15655,7 +15657,7 @@ int D_Img_Proc::Feature_Visualize(Mat *pMA_Out, Mat *pMA_In, int feature, int co
                 scale,
                 Scalar(255, 255, 255),
                 thickness,
-                CV_AA);
+                cv::LINE_AA);
 
     MA_tmp_black.release();
     MA_tmp_edges.release();
@@ -18155,7 +18157,7 @@ int D_Img_Proc::Draw_Text(Mat *pMA_Target, QString text, int x, int y, int thick
                     scale,
                     Scalar(value),
                     thickness,
-                    CV_AA);
+                    cv::LINE_AA);
         break;
 
     case 2:
@@ -18167,7 +18169,7 @@ int D_Img_Proc::Draw_Text(Mat *pMA_Target, QString text, int x, int y, int thick
                     scale,
                     Scalar(value, value),
                     thickness,
-                    CV_AA);
+                    cv::LINE_AA);
         break;
 
     case 3:
@@ -18179,7 +18181,7 @@ int D_Img_Proc::Draw_Text(Mat *pMA_Target, QString text, int x, int y, int thick
                     scale,
                     Scalar(value, value, value),
                     thickness,
-                    CV_AA);
+                    cv::LINE_AA);
         break;
 
     case 4:
@@ -18191,7 +18193,7 @@ int D_Img_Proc::Draw_Text(Mat *pMA_Target, QString text, int x, int y, int thick
                     scale,
                     Scalar(value, value, value, value),
                     thickness,
-                    CV_AA);
+                    cv::LINE_AA);
         break;
 
     default:
@@ -18217,7 +18219,7 @@ int D_Img_Proc::Draw_Text(Mat *pMA_Target, QString text, int x, int y, int thick
                     scale,
                     Scalar(value_b, value_g, value_r),
                     thickness,
-                    CV_AA);
+                    cv::LINE_AA);
 
     return ER_okay;
 }
@@ -18237,7 +18239,7 @@ int D_Img_Proc::Draw_Text_ContrastColor(Mat *pMA_Target, QString text, int x, in
                 scale,
                 Contrast_Color(pMA_Target->at<Vec3d>(y, x)),
                 thickness,
-                CV_AA);
+                cv::LINE_AA);
 
     return ER_okay;
 }
@@ -18259,7 +18261,7 @@ int D_Img_Proc::Draw_Label_Numbers_LUT(Mat *pMA_Out, Mat *pMA_In, Mat *pMA_Label
         ER = Convert_Color(
                     pMA_Out,
                     pMA_In,
-                    CV_GRAY2BGR);
+                    cv::COLOR_GRAY2BGR);
         if(ER != ER_okay)   return ER;
     }
     else
@@ -18293,7 +18295,7 @@ int D_Img_Proc::Draw_Label_Numbers_LUT(Mat *pMA_Out, Mat *pMA_In, Mat *pMA_Label
         ER = Convert_Color(
                     &MA_tmp_border,
                     &MA_tmp_border,
-                    CV_GRAY2BGR);
+                    cv::COLOR_GRAY2BGR);
         if(ER != ER_okay)   return ER;
 
         //subtract borders
@@ -18334,7 +18336,7 @@ int D_Img_Proc::Draw_Label_Numbers_LUT(Mat *pMA_Out, Mat *pMA_In, Mat *pMA_Label
                     scale,
                     Scalar(b, g, r),
                     thickness,
-                    CV_AA);
+                    cv::LINE_AA);
 
 
     return ER_okay;
@@ -18358,7 +18360,7 @@ int D_Img_Proc::Draw_Label_Text(Mat *pMA_Out, Mat *pMA_In, Mat *pMA_Label, QStri
         ER = Convert_Color(
                     pMA_Out,
                     pMA_In,
-                    CV_GRAY2BGR);
+                    cv::COLOR_GRAY2BGR);
         if(ER != ER_okay)   return ER;
     }
     else
@@ -18392,7 +18394,7 @@ int D_Img_Proc::Draw_Label_Text(Mat *pMA_Out, Mat *pMA_In, Mat *pMA_Label, QStri
         ER = Convert_Color(
                     &MA_tmp_border,
                     &MA_tmp_border,
-                    CV_GRAY2BGR);
+                    cv::COLOR_GRAY2BGR);
         if(ER != ER_okay)   return ER;
 
         //subtract borders
@@ -18436,7 +18438,7 @@ int D_Img_Proc::Draw_Label_Text(Mat *pMA_Out, Mat *pMA_In, Mat *pMA_Label, QStri
                     scale,
                     Scalar(b, g, r),
                     thickness,
-                    CV_AA);
+                    cv::LINE_AA);
 
 
     return ER_okay;
@@ -18477,7 +18479,7 @@ int D_Img_Proc::Draw_Label_Numbers_LUT_Gray(Mat *pMA_Out, Mat *pMA_In, Mat *pMA_
     ER = Normalize(
                 &MA_tmp_val,
                 pMA_In,
-                CV_MINMAX,
+                NORM_MINMAX,
                 CV_8U,
                 0,
                 255);
@@ -18509,7 +18511,7 @@ int D_Img_Proc::Draw_Label_Numbers_LUT_Gray(Mat *pMA_Out, Mat *pMA_In, Mat *pMA_
                     scale,
                     Scalar(255),
                     thickness,
-                    CV_AA);
+                    cv::LINE_AA);
 
     //merge---------------------------------------------------------
 
@@ -18542,7 +18544,7 @@ int D_Img_Proc::Draw_Label_Numbers(Mat *pMA_Out, Mat *pMA_In, Mat *pMA_Label, do
     ER = Normalize(
                 &MA_labels8bit,
                 pMA_Label,
-                CV_MINMAX,
+                NORM_MINMAX,
                 CV_8U,
                 0,
                 255);
@@ -18558,7 +18560,7 @@ int D_Img_Proc::Draw_Label_Numbers(Mat *pMA_Out, Mat *pMA_In, Mat *pMA_Label, do
     ER = Normalize(
                 &MA_in8bit,
                 pMA_In,
-                CV_MINMAX,
+                cv::NORM_MINMAX,
                 CV_8U,
                 0,
                 255);
@@ -18635,7 +18637,7 @@ int D_Img_Proc::Draw_Label_Numbers_Center(Mat *pMA_Out, Mat *pMA_Label, double s
                     scale,
                     Scalar(255),
                     thickness,
-                    CV_AA);
+                    cv::LINE_AA);
     }
 
     return ER_okay;
@@ -18775,7 +18777,7 @@ int D_Img_Proc::Draw_ContourText(Mat *pMA_Target, vector<vector<Point>> vContour
                     text_scale,
                     color,
                     text_thickness,
-                    CV_AA);
+                    cv::LINE_AA);
 
     //qDebug() << "Draw_ContourText" << "end";
     return ER_okay;
@@ -20444,12 +20446,12 @@ int D_Img_Proc::Draw_Label_Numbers_Corner(Mat *pMA_Out, Mat *pMA_Label, double s
                     putText(
                                 *pMA_Out,
                                 to_string(label_number),
-                                cvPoint(x, y),
+                                Point(x, y),
                                 FONT_HERSHEY_COMPLEX_SMALL,
                                 scale,
                                 Scalar(255),
                                 thickness,
-                                CV_AA);
+                                cv::LINE_AA);
                     label_number++;
                 }
     }
@@ -20462,12 +20464,12 @@ int D_Img_Proc::Draw_Label_Numbers_Corner(Mat *pMA_Out, Mat *pMA_Label, double s
                     putText(
                                 *pMA_Out,
                                 to_string(label_number),
-                                cvPoint(x, y),
+                                Point(x, y),
                                 FONT_HERSHEY_COMPLEX_SMALL,
                                 scale,
                                 Scalar(255),
                                 thickness,
-                                CV_AA);
+                                cv::LINE_AA);
                     label_number++;
                 }
     }

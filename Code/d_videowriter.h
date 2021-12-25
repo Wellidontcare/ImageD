@@ -19,6 +19,7 @@
 
 //general
 #include <iostream>
+#include <opencv2/videoio.hpp>
 #include <vector>
 #include <fstream>
 #include <sstream>
@@ -74,7 +75,7 @@ public:
 private:
 
     //const int           prop_FourCC_compressed = CV_FOURCC('a','v','c','1'); //is buggy...
-    const int           prop_FourCC_full = CV_FOURCC('M','J','P','G');
+    const int           prop_FourCC_full = cv::VideoWriter::fourcc('M','J','P','G');
 
     //Destination Information
     QFileInfo           FI_Out;

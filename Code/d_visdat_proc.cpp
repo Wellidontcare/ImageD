@@ -4608,7 +4608,7 @@ int D_VisDat_Proc::Convert_Color(D_VisDat_Obj *pVD_Out, D_VisDat_Obj *pVD_In, in
 {
     //output channels
     int ch_out = 3;
-    if(cvt_mode == CV_BGR2GRAY || cvt_mode == CV_RGB2GRAY)
+    if(cvt_mode == cv::COLOR_BGR2GRAY || cvt_mode == cv::COLOR_RGB2GRAY)
         ch_out = 1;
 
     //create output VD
@@ -4841,7 +4841,7 @@ int D_VisDat_Proc::Threshold_Auto_Otsu(D_VisDat_Obj *pVD_Out, D_VisDat_Obj *pVD_
                 pVD_In,
                 mode,
                 max,
-                CV_THRESH_OTSU);
+                cv::THRESH_OTSU);
 }
 
 int D_VisDat_Proc::Threshold_Absolute_8U(D_VisDat_Obj *pVD_Out, D_VisDat_Obj *pVD_In, int mode, int max, int thresh)

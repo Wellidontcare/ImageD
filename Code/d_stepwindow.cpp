@@ -999,41 +999,41 @@ void D_StepWindow::Update_Img_Proc()
 
             if(ui->comboBox_02_Color_Direction_Top->currentIndex() == 1)
             {
-                     if(ui->radioButton_02_Color_RGB_BGR->isChecked())      cvt_mode = CV_BGR2RGB;
-                else if(ui->radioButton_02_Color_BGR_RGB->isChecked())      cvt_mode = CV_RGB2BGR;
-                else if(ui->radioButton_02_Color_Grey_RGB->isChecked())     cvt_mode = CV_GRAY2RGB;
-                else if(ui->radioButton_02_Color_Grey_BGR->isChecked())     cvt_mode = CV_GRAY2BGR;
-                else if(ui->radioButton_02_Color_XYZ_RGB->isChecked())      cvt_mode = CV_XYZ2RGB;
-                else if(ui->radioButton_02_Color_XYZ_BGR->isChecked())      cvt_mode = CV_XYZ2BGR;
-                else if(ui->radioButton_02_Color_YCrCb_RGB->isChecked())    cvt_mode = CV_YCrCb2RGB;
-                else if(ui->radioButton_02_Color_YCrCb_BGR->isChecked())    cvt_mode = CV_YCrCb2BGR;
-                else if(ui->radioButton_02_Color_HSV_RGB->isChecked())      cvt_mode = CV_HSV2RGB_FULL;
-                else if(ui->radioButton_02_Color_HSV_BGR->isChecked())      cvt_mode = CV_HSV2BGR_FULL;
-                else if(ui->radioButton_02_Color_HSL_RGB->isChecked())      cvt_mode = CV_HSV2RGB;
-                else if(ui->radioButton_02_Color_HSL_BGR->isChecked())      cvt_mode = CV_HSV2BGR;
-                else if(ui->radioButton_02_Color_Lab_RGB->isChecked())      cvt_mode = CV_Lab2RGB;
-                else if(ui->radioButton_02_Color_Lab_BGR->isChecked())      cvt_mode = CV_Lab2BGR;
-                else if(ui->radioButton_02_Color_Luv_RGB->isChecked())      cvt_mode = CV_Luv2RGB;
-                else                                                        cvt_mode = CV_Luv2BGR;
+                     if(ui->radioButton_02_Color_RGB_BGR->isChecked())      cvt_mode = cv::COLOR_BGR2RGB;
+                else if(ui->radioButton_02_Color_BGR_RGB->isChecked())      cvt_mode = cv::COLOR_RGB2BGR;
+                else if(ui->radioButton_02_Color_Grey_RGB->isChecked())     cvt_mode = cv::COLOR_GRAY2RGB;
+                else if(ui->radioButton_02_Color_Grey_BGR->isChecked())     cvt_mode = cv::COLOR_GRAY2BGR;
+                else if(ui->radioButton_02_Color_XYZ_RGB->isChecked())      cvt_mode = cv::COLOR_XYZ2RGB;
+                else if(ui->radioButton_02_Color_XYZ_BGR->isChecked())      cvt_mode = cv::COLOR_XYZ2BGR;
+                else if(ui->radioButton_02_Color_YCrCb_RGB->isChecked())    cvt_mode = cv::COLOR_YCrCb2RGB;
+                else if(ui->radioButton_02_Color_YCrCb_BGR->isChecked())    cvt_mode = cv::COLOR_YCrCb2BGR;
+                else if(ui->radioButton_02_Color_HSV_RGB->isChecked())      cvt_mode = cv::COLOR_HSV2RGB_FULL;
+                else if(ui->radioButton_02_Color_HSV_BGR->isChecked())      cvt_mode = cv::COLOR_HSV2BGR_FULL;
+                else if(ui->radioButton_02_Color_HSL_RGB->isChecked())      cvt_mode = cv::COLOR_HSV2RGB;
+                else if(ui->radioButton_02_Color_HSL_BGR->isChecked())      cvt_mode = cv::COLOR_HSV2BGR;
+                else if(ui->radioButton_02_Color_Lab_RGB->isChecked())      cvt_mode = cv::COLOR_Lab2RGB;
+                else if(ui->radioButton_02_Color_Lab_BGR->isChecked())      cvt_mode = cv::COLOR_Lab2BGR;
+                else if(ui->radioButton_02_Color_Luv_RGB->isChecked())      cvt_mode = cv::COLOR_Luv2RGB;
+                else                                                        cvt_mode = cv::COLOR_Luv2BGR;
             }
             else
             {
-                    if(ui->radioButton_02_Color_RGB_BGR->isChecked())      cvt_mode = CV_RGB2BGR;
-               else if(ui->radioButton_02_Color_BGR_RGB->isChecked())      cvt_mode = CV_BGR2RGB;
-               else if(ui->radioButton_02_Color_Grey_RGB->isChecked())     cvt_mode = CV_RGB2GRAY;
-               else if(ui->radioButton_02_Color_Grey_BGR->isChecked())     cvt_mode = CV_BGR2GRAY;
-               else if(ui->radioButton_02_Color_XYZ_RGB->isChecked())      cvt_mode = CV_RGB2XYZ;
-               else if(ui->radioButton_02_Color_XYZ_BGR->isChecked())      cvt_mode = CV_BGR2XYZ;
-               else if(ui->radioButton_02_Color_YCrCb_RGB->isChecked())    cvt_mode = CV_RGB2YCrCb;
-               else if(ui->radioButton_02_Color_YCrCb_BGR->isChecked())    cvt_mode = CV_BGR2YCrCb;
-               else if(ui->radioButton_02_Color_HSV_RGB->isChecked())      cvt_mode = CV_RGB2HSV_FULL;
-               else if(ui->radioButton_02_Color_HSV_BGR->isChecked())      cvt_mode = CV_BGR2HSV_FULL;
-               else if(ui->radioButton_02_Color_HSL_RGB->isChecked())      cvt_mode = CV_RGB2HSV;
-               else if(ui->radioButton_02_Color_HSL_BGR->isChecked())      cvt_mode = CV_BGR2HSV;
-               else if(ui->radioButton_02_Color_Lab_RGB->isChecked())      cvt_mode = CV_RGB2Lab;
-               else if(ui->radioButton_02_Color_Lab_BGR->isChecked())      cvt_mode = CV_BGR2Lab;
-               else if(ui->radioButton_02_Color_Luv_RGB->isChecked())      cvt_mode = CV_RGB2Luv;
-               else                                                        cvt_mode = CV_BGR2Luv;
+                    if(ui->radioButton_02_Color_RGB_BGR->isChecked())      cvt_mode = cv::COLOR_RGB2BGR;
+               else if(ui->radioButton_02_Color_BGR_RGB->isChecked())      cvt_mode = cv::COLOR_BGR2RGB;
+               else if(ui->radioButton_02_Color_Grey_RGB->isChecked())     cvt_mode = cv::COLOR_RGB2GRAY;
+               else if(ui->radioButton_02_Color_Grey_BGR->isChecked())     cvt_mode = cv::COLOR_BGR2GRAY;
+               else if(ui->radioButton_02_Color_XYZ_RGB->isChecked())      cvt_mode = cv::COLOR_RGB2XYZ;
+               else if(ui->radioButton_02_Color_XYZ_BGR->isChecked())      cvt_mode = cv::COLOR_BGR2XYZ;
+               else if(ui->radioButton_02_Color_YCrCb_RGB->isChecked())    cvt_mode = cv::COLOR_RGB2YCrCb;
+               else if(ui->radioButton_02_Color_YCrCb_BGR->isChecked())    cvt_mode = cv::COLOR_BGR2YCrCb;
+               else if(ui->radioButton_02_Color_HSV_RGB->isChecked())      cvt_mode = cv::COLOR_RGB2HSV_FULL;
+               else if(ui->radioButton_02_Color_HSV_BGR->isChecked())      cvt_mode = cv::COLOR_BGR2HSV_FULL;
+               else if(ui->radioButton_02_Color_HSL_RGB->isChecked())      cvt_mode = cv::COLOR_RGB2HSV;
+               else if(ui->radioButton_02_Color_HSL_BGR->isChecked())      cvt_mode = cv::COLOR_BGR2HSV;
+               else if(ui->radioButton_02_Color_Lab_RGB->isChecked())      cvt_mode = cv::COLOR_RGB2Lab;
+               else if(ui->radioButton_02_Color_Lab_BGR->isChecked())      cvt_mode = cv::COLOR_BGR2Lab;
+               else if(ui->radioButton_02_Color_Luv_RGB->isChecked())      cvt_mode = cv::COLOR_RGB2Luv;
+               else                                                        cvt_mode = cv::COLOR_BGR2Luv;
             }
 
             ERR(D_VisDat_Proc::Convert_Color(
@@ -1155,11 +1155,11 @@ void D_StepWindow::Update_Img_Proc()
         {
             int out_mode = 0;
             switch (ui->comboBox_03_Thres_Output_Mode->currentIndex()) {
-            case 0:     out_mode = CV_THRESH_BINARY;        break;
-            case 1:     out_mode = CV_THRESH_BINARY_INV;    break;
-            case 2:     out_mode = CV_THRESH_TRUNC;         break;
-            case 3:     out_mode = CV_THRESH_TOZERO;        break;
-            case 4:     out_mode = CV_THRESH_TOZERO_INV;    break;
+            case 0:     out_mode = cv::THRESH_BINARY;        break;
+            case 1:     out_mode = cv::THRESH_BINARY_INV;    break;
+            case 2:     out_mode = cv::THRESH_TRUNC;         break;
+            case 3:     out_mode = cv::THRESH_TOZERO;        break;
+            case 4:     out_mode = cv::THRESH_TOZERO_INV;    break;
             default:                                        break;}
 
             double max_val          = ui->doubleSpinBox_03_Thres_Max_Value_Out->value();

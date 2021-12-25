@@ -8,6 +8,7 @@
 
 #include "d_analysiswindow.h"
 #include "ui_d_analysiswindow.h"
+#include <opencv2/core/base.hpp>
 
 /*!
  * \brief D_AnalysisWindow::D_AnalysisWindow Constructor.
@@ -432,7 +433,7 @@ void D_AnalysisWindow::Image_Value_Add(Mat *pMA_add, QString name)
     ER = D_Img_Proc::Normalize(
                 &MA_tmp_8bit,
                 pMA_add,
-                CV_MINMAX,
+                cv::NORM_MINMAX,
                 CV_8U,
                 0,
                 255);

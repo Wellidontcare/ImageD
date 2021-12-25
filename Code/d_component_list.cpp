@@ -107,7 +107,7 @@ int D_Component_List::set_Mat(Mat *pMA_BinaryOrLabel, int connectivity)
     /*
     qDebug() << "save mat";
     Mat MA_tmp_label_norm;
-    normalize(MA_Labels, MA_tmp_label_norm, 0, 255, CV_MINMAX, CV_8UC1);
+    normalize(MA_Labels, MA_tmp_label_norm, 0, 255, cv::NORM_MINMAX, CV_8UC1);
     imwrite(("c/Binary Mat.jpg"), MA_Binary);
     imwrite(("D:/David_Eilenstein/ImageD/StepsStream/stack_test/Labels Mat.jpg"), MA_tmp_label_norm);
     */

@@ -371,7 +371,7 @@ void D_MAKRO_CoreFoci::Update_Step_Cores(unsigned int step)
         ERR(D_Img_Proc::Normalize(
                 &(vMA_Cores[c_ST_C_INPUT_CONV_8BIT]),
                 &(vMA_Cores[c_ST_C_LOAD]),
-                CV_MINMAX,
+                cv::NORM_MINMAX,
                 CV_8UC1,
                 0,
                 255),
@@ -411,9 +411,9 @@ void D_MAKRO_CoreFoci::Update_Step_Cores(unsigned int step)
         ERR(D_Img_Proc::Threshold_Adaptive(
                 &(vMA_Cores[c_ST_C_BIN_THRES]),
                 &(vMA_Cores[c_ST_C_INPUT_BLUR]),
-                CV_THRESH_BINARY_INV,
+                cv::THRESH_BINARY_INV,
                 255,
-                CV_ADAPTIVE_THRESH_GAUSSIAN_C,
+                cv::ADAPTIVE_THRESH_GAUSSIAN_C,
                 ui->spinBox_SetCore_04_Thres_Size->value() / 2,
                 ui->doubleSpinBox_SetCore_04_Thres_Offset->value()),
             "Update_Step_Cores",
@@ -449,8 +449,8 @@ void D_MAKRO_CoreFoci::Update_Step_Cores(unsigned int step)
         ERR(D_Img_Proc::Transformation_Distance(
                 &(vMA_Cores[c_ST_C_DIST_TRANSFORM]),
                 &(vMA_Cores[c_ST_C_BIN_INV]),
-                CV_DIST_L2,
-                CV_DIST_MASK_PRECISE),
+                cv::DIST_L2,
+                cv::DIST_MASK_PRECISE),
             "Update_Step_Cores",
             "c_ST_C_DIST_TRANSFORM");
     }
@@ -513,7 +513,7 @@ void D_MAKRO_CoreFoci::Update_Step_Cores(unsigned int step)
         ERR(D_Img_Proc::Normalize(
                 &(vMA_Cores[c_ST_C_RANK_CONV_8BIT]),
                 &(vMA_Cores[c_ST_C_RANK_EILENSTEIN]),
-                CV_MINMAX,
+                cv::NORM_MINMAX,
                 CV_8UC1,
                 0,
                 255),
@@ -527,7 +527,7 @@ void D_MAKRO_CoreFoci::Update_Step_Cores(unsigned int step)
         ERR(D_Img_Proc::Threshold_Value(
                 &(vMA_Cores[c_ST_C_LMAX_BIN]),
                 &(vMA_Cores[c_ST_C_RANK_CONV_8BIT]),
-                CV_THRESH_BINARY,
+                cv::THRESH_BINARY,
                 255,
                 ui->spinBox_SetCore_11_Thresh_Thres->value()),
             "Update_Step_Cores",
@@ -678,7 +678,7 @@ void D_MAKRO_CoreFoci::Update_Step_Plasma(unsigned int step)
         ERR(D_Img_Proc::Normalize(
                 &(vMA_Plasma[c_ST_P_INPUT_CONV_8BIT]),
                 &(vMA_Plasma[c_ST_P_LOAD]),
-                CV_MINMAX,
+                cv::NORM_MINMAX,
                 CV_8UC1,
                 0,
                 255),
@@ -717,9 +717,9 @@ void D_MAKRO_CoreFoci::Update_Step_Plasma(unsigned int step)
         ERR(D_Img_Proc::Threshold_Adaptive(
                 &(vMA_Plasma[c_ST_P_BIN_THRES]),
                 &(vMA_Plasma[c_ST_P_INPUT_BLUR]),
-                CV_THRESH_BINARY,
+                cv::THRESH_BINARY,
                 255,
-                CV_ADAPTIVE_THRESH_MEAN_C,
+                cv::ADAPTIVE_THRESH_MEAN_C,
                 ui->spinBox_SetCyto_Thresh_Size->value() / 2,
                 ui->doubleSpinBox_SetCyto_Thresh_Offset->value()),
             "Update_Step_Plasma",
@@ -811,7 +811,7 @@ void D_MAKRO_CoreFoci::Update_Step_Foci(unsigned int step)
         ERR(D_Img_Proc::Normalize(
                 &(vMA_Foci[c_ST_F_INPUT_CONV_8BIT]),
                 &(vMA_Foci[c_ST_F_LOAD]),
-                CV_MINMAX,
+                cv::NORM_MINMAX,
                 CV_8UC1,
                 0,
                 255),
@@ -850,9 +850,9 @@ void D_MAKRO_CoreFoci::Update_Step_Foci(unsigned int step)
         ERR(D_Img_Proc::Threshold_Adaptive(
                 &(vMA_Foci[c_ST_F_BIN_THRES]),
                 &(vMA_Foci[c_ST_F_INPUT_BLUR]),
-                CV_THRESH_BINARY,
+                cv::THRESH_BINARY,
                 255,
-                CV_ADAPTIVE_THRESH_GAUSSIAN_C,
+                cv::ADAPTIVE_THRESH_GAUSSIAN_C,
                 ui->spinBox_SetFoci_03_Size->value() / 2,
                 ui->doubleSpinBox_SetFoci_03_Offset->value()),
             "Update_Step_Foci",
@@ -1012,7 +1012,7 @@ void D_MAKRO_CoreFoci::Update_Step_Foci(unsigned int step)
         ERR(D_Img_Proc::Normalize(
                 &(vMA_Foci[c_ST_F_REGIONS_8BIT]),
                 &(vMA_Foci[c_ST_F_REGIONS_CELLS_APPROX]),
-                CV_MINMAX,
+                cv::NORM_MINMAX,
                 CV_8U,
                 0,
                 255),

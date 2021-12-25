@@ -7,6 +7,7 @@
  ************************************/
 
 #include "d_component.h"
+#include <opencv2/imgproc.hpp>
 
 D_Component::D_Component()
 {
@@ -100,7 +101,7 @@ void D_Component::Calc_Contour()
                 MA_Cropped,
                 vvp_Contours_tmp,
                 RETR_CCOMP,
-                CV_CHAIN_APPROX_NONE);
+                CHAIN_APPROX_NONE);
     //qDebug() << "D_Component - contour export";
 
     vp_Contour = vvp_Contours_tmp[0];
@@ -140,8 +141,8 @@ void D_Component::Calc_Distance()
     distanceTransform(
                 MA_Distance,
                 MA_Distance,
-                CV_DIST_L2,
-                CV_DIST_MASK_3);
+                DIST_L2,
+                DIST_MASK_3);
 
     calced_Mat_Distance = true;
 }

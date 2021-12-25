@@ -400,9 +400,9 @@ void D_MAKRO_CiliaSphereTracker::Update_ImgProc_Step(int step)
         ERR(D_Img_Proc::Threshold_Auto(
                 &(vMA_ProcSteps[STEP_BINARY]),
                 &(vMA_ProcSteps[STEP_BLUR]),
-                CV_THRESH_BINARY,
+                cv::THRESH_BINARY,
                 255,
-                CV_THRESH_OTSU),
+                cv::THRESH_OTSU),
             "Update_ImgProc_Step",
             "STEP_BINARY");
 
@@ -764,7 +764,7 @@ void D_MAKRO_CiliaSphereTracker::Update_Result_GraphicsVectors()
                     D_Img_Proc::Convert_Color(
                         &MA_TimeProject_Show,
                         &MA_tmp_Cropped,
-                        CV_GRAY2BGR),
+                        cv::COLOR_GRAY2BGR),
                     "Update_Result_GraphicsVectors",
                     "Convert_Color - 1ch->3ch");
         MA_tmp_Cropped.release();

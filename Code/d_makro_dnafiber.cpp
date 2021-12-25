@@ -353,7 +353,7 @@ void D_MAKRO_DnaFiber::Update_ImgProc_Step(int step)
         ER = D_VisDat_Proc::Normalize(
                     &(vVD_ProcSteps[c_ST_LOAD]),
                     &VD_Tmp,
-                    CV_MINMAX,
+                    cv::NORM_MINMAX,
                     CV_8U,
                     0,
                     255);

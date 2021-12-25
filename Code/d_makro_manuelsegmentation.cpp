@@ -475,7 +475,7 @@ void D_MAKRO_ManuelSegmentation::Update_ImgProc_Step(int step)
             ERR(D_VisDat_Proc::Normalize(
                     &VD_LoadAny_8bit,
                     &VD_LoadAny,
-                    CV_MINMAX,
+                    cv::NORM_MINMAX,
                     CV_8U,
                     0,
                     255),
@@ -531,7 +531,7 @@ void D_MAKRO_ManuelSegmentation::Update_ImgProc_Step(int step)
             ERR(D_Img_Proc::Convert_Color(
                     &(vMA_ProcSteps[STEP_CONVERT_COLOR]),
                     &(vMA_ProcSteps[STEP_LOAD]),
-                    CV_GRAY2BGR),
+                    cv::COLOR_GRAY2BGR),
                 "Update_ImgProc_Step",
                 "STEP_CONVERT_COLOR - LOAD_GRAY - D_Img_Proc::Convert_Color");
             break;

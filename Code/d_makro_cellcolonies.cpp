@@ -1065,7 +1065,7 @@ void D_MAKRO_CellColonies::Update_Image_Segmentation()
     ERR(D_Img_Proc::Convert_Color(
             &MA_edges,
             &(vMA_Results[c_ST_B_EDGES]),
-            CV_BGR2GRAY),
+            cv::COLOR_BGR2GRAY),
         "Update_Image_Segmentation",
         "convert inverted edges to gray");
 
@@ -1415,14 +1415,14 @@ void D_MAKRO_CellColonies::Update_Step_Cells(int step)
         ERR(D_Img_Proc::Convert_Color(
                 &(vMA_Cells[c_ST_CELLS_BINARY]),
                 &(vMA_Cells[c_ST_CELLS_GRAB_COLOR]),
-                CV_BGR2GRAY),
+                cv::COLOR_BGR2GRAY),
             "Update_Step_Cells",
             "c_ST_CELLS_BINARY");
 
         ERR(D_Img_Proc::Threshold_Value(
                 &(vMA_Cells[c_ST_CELLS_BINARY]),
                 &(vMA_Cells[c_ST_CELLS_BINARY]),
-                CV_THRESH_BINARY,
+                cv::THRESH_BINARY,
                 255,
                 1),
             "Update_Step_Cells",
@@ -1469,7 +1469,7 @@ void D_MAKRO_CellColonies::Update_Step_Cells(int step)
         ERR(D_Img_Proc::Convert_Color(
                 &(vMA_Cells[c_ST_SEED_HSV]),
                 &(vMA_Cells[c_ST_INPUT_ANTI_SHADE]),
-                CV_BGR2HSV_FULL),
+                cv::COLOR_BGR2HSV_FULL),
             "Update_Step_Cells",
             "c_ST_SEED_HSV");
     }
@@ -1506,9 +1506,9 @@ void D_MAKRO_CellColonies::Update_Step_Cells(int step)
         ERR(D_Img_Proc::Threshold_Adaptive(
                 &(vMA_Cells[c_ST_SEED_THRESH]),
                 &(vMA_Cells[c_ST_SEED_BLUR]),
-                CV_THRESH_BINARY,
+                cv::THRESH_BINARY,
                 255,
-                CV_ADAPTIVE_THRESH_MEAN_C,
+                cv::ADAPTIVE_THRESH_MEAN_C,
                 ui->spinBox_ProcCon_Thres_Size->value() / 2,
                 ui->doubleSpinBox_ProcCon_Thres_Offset->value()),
             "Update_Step_Cells",
@@ -1647,7 +1647,7 @@ void D_MAKRO_CellColonies::Update_Step_Cells(int step)
         ERR(D_Img_Proc::Convert_Color(
                 &(vMA_Cells[c_ST_MEASURE_HSV]),
                 &(vMA_Cells[c_ST_MEASURE_DIFF]),
-                CV_BGR2HSV_FULL),
+                cv::COLOR_BGR2HSV_FULL),
             "Update_Step_Cells",
             "c_ST_MEASURE_HSV");
     }
@@ -1786,7 +1786,7 @@ void D_MAKRO_CellColonies::Update_Step_Results(int step)
         ERR(D_Img_Proc::Convert_Color(
                 &(vMA_Results[c_ST_G_INPUT_SAT]),
                 &(vMA_Cells[c_ST_SEED_SATURATION]),
-                CV_GRAY2BGR),
+                cv::COLOR_GRAY2BGR),
             "Update_Step_Results",
             "c_ST_G_INPUT_SAT");
     }
@@ -1797,7 +1797,7 @@ void D_MAKRO_CellColonies::Update_Step_Results(int step)
         ERR(D_Img_Proc::Convert_Color(
                 &(vMA_Results[c_ST_G_DIFF_VAL]),
                 &(vMA_Cells[c_ST_MEASURE_VALUE]),
-                CV_GRAY2BGR),
+                cv::COLOR_GRAY2BGR),
             "Update_Step_Results",
             "c_ST_G_DIFF_VAL");
     }
@@ -1814,7 +1814,7 @@ void D_MAKRO_CellColonies::Update_Step_Results(int step)
         ERR(D_Img_Proc::Convert_Color(
                 &(vMA_Results[c_ST_B_EDGES]),
                 &(vMA_Results[c_ST_B_EDGES]),
-                CV_GRAY2BGR),
+                cv::COLOR_GRAY2BGR),
             "Update_Step_Results",
             "c_ST_B_EDGES");
     }
@@ -1832,7 +1832,7 @@ void D_MAKRO_CellColonies::Update_Step_Results(int step)
         ERR(D_Img_Proc::Convert_Color(
                 &(vMA_Results[c_ST_B_NUMBERS]),
                 &(vMA_Results[c_ST_B_NUMBERS]),
-                CV_GRAY2BGR),
+                cv::COLOR_GRAY2BGR),
             "Update_Step_Results",
             "c_ST_B_NUMBERS");
     }
@@ -1854,7 +1854,7 @@ void D_MAKRO_CellColonies::Update_Step_Results(int step)
         ERR(D_Img_Proc::Convert_Color(
                 &(vMA_Results[c_ST_B_ROI_OUT]),
                 &(vMA_Cells[c_ST_SEGM_BINARY]),
-                CV_GRAY2BGR),
+                cv::COLOR_GRAY2BGR),
             "Update_Step_Results",
             "c_ST_B_ROI");
     }

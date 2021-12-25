@@ -272,7 +272,7 @@ void D_MAKRO_Mitochondrien::Convert_Parameters_8bit_All()
         ERR(D_Img_Proc::Normalize(
                 &(vMA_Parameter_All_8Bit[s]),
                 &(vMA_Parameter_All_Float[s]),
-                CV_MINMAX,
+                cv::NORM_MINMAX,
                 CV_8UC1,
                 0,
                 255),
@@ -288,7 +288,7 @@ void D_MAKRO_Mitochondrien::Convert_Parameters_8bit_RoI()
         ERR(D_Img_Proc::Normalize(
                 &(vMA_Parameter_RoI_8Bit[s]),
                 &(vMA_Parameter_RoI_Float[s]),
-                CV_MINMAX,
+                cv::NORM_MINMAX,
                 CV_8UC1,
                 0,
                 255),
@@ -344,7 +344,7 @@ void D_MAKRO_Mitochondrien::Update_Step_Photons(unsigned int step)
         ERR(D_Img_Proc::Normalize(
                 &(vMA_Photons[c_ST_PH_INPUT_CONV_8bit]),
                 &(vMA_Photons[c_ST_PH_SHADE_CORRECT]),
-                CV_MINMAX,
+                cv::NORM_MINMAX,
                 CV_8UC1,
                 0,
                 255),
@@ -383,17 +383,17 @@ void D_MAKRO_Mitochondrien::Update_Step_Photons(unsigned int step)
         /*
         int bin_mode;
         if(ui->checkBox_PhoCon_Thresh_Mito->isChecked())
-            bin_mode = CV_THRESH_BINARY;        //Mitochondria
+            bin_mode = cv::THRESH_BINARY;        //Mitochondria
         else
-            bin_mode = CV_THRESH_BINARY_INV;    //Other stuff
+            bin_mode = cv::THRESH_BINARY_INV;    //Other stuff
         */
 
         ERR(D_Img_Proc::Threshold_Adaptive(
                 &(vMA_Photons[c_ST_PH_BIN_THRES]),
                 &(vMA_Photons[c_ST_PH_INPUT_BLUR]),
-                CV_THRESH_BINARY,
+                cv::THRESH_BINARY,
                 255,
-                CV_ADAPTIVE_THRESH_GAUSSIAN_C,
+                cv::ADAPTIVE_THRESH_GAUSSIAN_C,
                 ui->spinBox_PhoCon_Thres_Size->value() / 2,
                 ui->doubleSpinBox_PhoCon_Thres_Offset->value()),
             "Update_Step_Photons",
@@ -1143,7 +1143,7 @@ void D_MAKRO_Mitochondrien::Update_View_Parameters()
         ERR(D_Img_Proc::Normalize(
                 &MA_ParView_tmp,
                 &MA_ParView_tmp,
-                CV_MINMAX,
+                cv::NORM_MINMAX,
                 CV_8U,
                 0,
                 255),
